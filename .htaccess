@@ -9,9 +9,6 @@ RewriteBase /
 #url tong quan
 RewriteRule ^login$ /?m=user&act=login [L]
 RewriteRule ^admin-quanly$ /?m=user&act=staff_login [L]
-#RewriteRule ^dang-ky/([0-9]+|)$ /?m=client&act=register&ref=$1 [L]
-RewriteRule ^fund/([0-9]+|)/(.*)$ /?m=pub&act=fund&fid=$1&page=$2 [L]
-#RewriteRule ^dang-ky$ /?m=client&act=register [L]
 
 RewriteRule ^trang-chu$ /?m=home&act=index [L]
 RewriteRule ^gio-hang$ /?m=cart&act=index [L]

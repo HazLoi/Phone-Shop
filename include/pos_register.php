@@ -449,13 +449,7 @@ class pos_register extends model{
 
 	public function get_detail_bystore_name( $store_name, $domain = '' )
 	{
-		global $db_store, $domain_http_type;
-
-		$belong_to_reseller = $this->get('belong_to_reseller');
-		if( $belong_to_reseller != '' && $belong_to_reseller != 0 )
-			$belong_to_reseller = " AND `belong_to_reseller` = '$belong_to_reseller' ";
-		else 
-			$belong_to_reseller = '';
+		global $db_store, $domain_http_type, $main;
 
 		$sqlDomain = '';
 		if( $domain != '' )
@@ -465,58 +459,9 @@ class pos_register extends model{
 		$sql = "SELECT * 
 				FROM $db_store->tbl_fix`pos_register` 
 				WHERE ( `store_name` = '$store_name' $sqlDomain )
-				$belong_to_reseller
 				LIMIT 1";
-
 		$row = $db_store->executeQuery ( $sql, 1 );
-
-		// kiểm tra xem link domain của pos_register có tồn tại record nào hay ko
-		// Nếu ko có thì tìm link trong cột domain_theme để tìm record 
-		if(!isset($row['id'])){
-			// lấy tất cả record pos_register
-			$l_pos = $this->filter_pos('','','','');
-			$l_domain_theme = array();
-			
-			$arr_domain = explode('.',$domain);
-			
-			// lấy tất cả domain_theme của các pos_register 
-			foreach ($l_pos as $key => $value) {
-				if($value['domain_theme'] != '' && is_array(json_decode($value['domain_theme'],true))){
-					$l_domain_theme = json_decode($value['domain_theme'],true);
-				}
-			}
-
-			// Tìm store name có domain = với domain được truyền vào
-			$name_db = '';
-			foreach ($l_domain_theme as $key => $value) {
-				// if($value['domain_theme'] == $domain || strpos($value['domain_members_card'],$arr_domain[0]) != ''){
-				if($value['domain_theme'] == $domain.';'){
-					$name_db = $value['store_name'];
-				}
-			}
-
-			// Lấy ra record có db = với giống name_db vừa tìm được và là web_erp
-			foreach ($l_pos as $key => $value) {
-				if($value['db'] == $name_db && $value['pos_type'] == 'web_erp'){
-					$row = $value;
-				}
-			}
-		}
-
-		// nếu domain của theme web không tồn tại thì check domain của card members
-		// if(!isset($row['id'])){
-		// 	// cắt chuỗi domain thành mảng chứa tên và đuôi của domain
-		// 	$arr_domain = explode('.',$domain);
-		// 	$sql_3 = "	SELECT * 
-		// 				FROM $db_store->tbl_fix`pos_register`
-		// 				WHERE `domain_theme` LIKE '%".$arr_domain['0']."%'
-		// 				AND `pos_type` = 'web_erp' 
-		// 				LIMIT 1";
-
-		// 	$row_2 = $db_store->executeQuery ( $sql_3, 1 );
-		// 	$row = $row_2;
-		// }
-
+		
 		if( $domain != '' && $domain == $row['domain'] ){
 			$row['domain_http_type'] = $row['domain_http_type'] == '1' ? 'https://':'http://';
 		}else{
@@ -918,4 +863,4 @@ class pos_register extends model{
 		return $kq;
 	}
 }
-$pos_register = new pos_register(); 
+

@@ -10,7 +10,7 @@ $db_store = new db();
 $server_sql             = 'localhost';
 $user_sql               = 'root';
 $pass_sql               = '';
-$database               = 'main_store';
+$database               = 'project_store';
 $db_retail_refix        = 'project_';
 $db_cafe_refix          = 'project_';
 

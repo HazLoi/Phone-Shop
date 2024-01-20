@@ -301,8 +301,8 @@ class main {
 
 		$sql = '';
 		//lay gio bat dau cua he thong nay
-		$opt = new option();
-		$setup = $opt->showall();
+		$option_setting = new option_setting();
+		$setup = $option_setting->showall();
 
 		if( $from <= $setup['begin_time']){
 			$from = $setup['begin_time'];
@@ -339,8 +339,8 @@ class main {
 
 		$sql = '';
 		//lay gio bat dau cua he thong nay
-		$opt = new option();
-		$setup = $opt->showall();
+		$option_setting = new option_setting();
+		$setup = $option_setting->showall();
 
 		if( $from <= $setup['begin_time']){
 			$from = $setup['begin_time'];
@@ -1382,5 +1382,10 @@ class main {
       return $str;
     }
 
+	 public function pr($value, $name = '', $die = ''){
+		echo "<br>$name==<pre>";
+		print_r($value);
+		echo "</pre>";
+		$die;
+	 }
 }
-$main->myGlobalFunction();
