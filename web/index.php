@@ -7,7 +7,6 @@ include 'define.php';
 $title 	= '';
 $m 		= $main->get('m');
 $act 		= $main->get('act');
-
 if($m == ''){
 	$m = 'home';
 }
@@ -15,17 +14,15 @@ if($act == ''){
 	$act = 'index';
 }
 
-if( isset($setup['lang']) && in_array($setup['lang'],array('vi','en')) ){
-	include 'lang/'.$setup['lang'].'/home.php';//load ngôn ngữ lên
-	$_SESSION['lang'] = $setup['lang'];
-}else{
-	$_SESSION['lang'] = 'vi';
-	include 'lang/vi/home.php';
-}
+$_SESSION['lang'] = 'vi';
+include 'lang/vi/home.php';
 
 $dataStore = $pos_register->get_detail_bystore_name($db_pos, $_SERVER['SERVER_NAME'] );
 $tpldirect = $tpldirect.$dataStore['store_theme'].'/';
 $themes_folder = $tpldomain.'templates/'.$dataStore['store_theme'].'/';
+
+$setting = new setting();
+$setup = $setting->showall();
 
 $stemp = 'm/'.$m.'.php';
 $temp = $m . '/' . $act . '.tpl';
@@ -44,6 +41,7 @@ $st->assign('themes_folder', $themes_folder);
 $st->assign('tpldirect', $tpldirect);
 $st->assign('tpldomain', $tpldomain);
 $st->assign('lang', $lang);
+$st->assign('setup', $setup);
 
 unset($setting);
 unset($setup);

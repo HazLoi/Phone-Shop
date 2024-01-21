@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2024-01-20 15:35:56
+<?php /* Smarty version Smarty-3.1.18, created on 2024-01-21 18:28:00
          compiled from "D:\a_project_2024\phone_shop\web\templates\project01\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:73456373065ab726498b225-09947948%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '11922d183139b1bbf3f2539192b6272a91f5c881' => 
     array (
       0 => 'D:\\a_project_2024\\phone_shop\\web\\templates\\project01\\header.tpl',
-      1 => 1705739753,
+      1 => 1705836440,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_65ab726498e881_67880700',
   'variables' => 
   array (
-    'title' => 0,
     'domain' => 0,
   ),
   'has_nocache_code' => false,
@@ -30,10 +29,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta name="keywords" content="<?php if (isset($_smarty_tpl->tpl_vars['title']->value)) {?><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
-<?php }?>" />
-    <title><?php if (isset($_smarty_tpl->tpl_vars['title']->value)) {?><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
-<?php }?></title>
+    <meta name="keywords" content="Chưa biết để gì" />
+    <title>Chưa biết để gì</title>
     <link href="<?php echo $_smarty_tpl->tpl_vars['domain']->value;?>
 favicon.ico" rel="shortcut icon" />
     <link href="<?php echo $_smarty_tpl->tpl_vars['domain']->value;?>
@@ -52,4 +49,30 @@ public/css/vanillaSelectBox.css" rel="stylesheet">
 public/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-<?php }} ?>
+    <div class="header" style="background-color: #456570;">
+        <div class="header-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1 col-sm-1 col-xs-12 logo">
+                        <img src="<?php echo $_smarty_tpl->tpl_vars['domain']->value;?>
+public/images/favicon-removebg-preview.png" width="80px" height="80px" alt="">
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-12 menu">
+                        <div class="header-menu">
+                            <div class="container">
+                                <div class="header-menu">
+                                    <div class="menu-top">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 menu">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><?php }} ?>

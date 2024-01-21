@@ -26,7 +26,6 @@ if(isset($dataStore['pos_type']) ){
 			$db_pos = $dataStore['db'];
 			if(isset($dataStore['source']) && $dataStore['source'] != '' ){
 				include ($dataStore['source'].'/index.php');
-				die;
 			}
 		}else{
 			$main->alert('Không thể khởi chạy ứng dụng.');

@@ -77,7 +77,7 @@ abstract class Smarty_Internal_CompileBase
                     $kv[] = $iitem;
                 }
                 // option flag?
-                if (in_array($kv['key'], $this->option_flags)) {
+                if (!empty($kv['key']) && in_array($kv['key'], $this->option_flags)) {
                     if (is_bool($kv['value'])) {
                         $_indexed_attr[$kv['key']] = $kv['value'];
                     } elseif (is_string($kv['value']) && in_array(trim($kv['value'], '\'"'), array('true', 'false'))) {
