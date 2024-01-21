@@ -1,10 +1,15 @@
 <?php
-class option_setting {
+class setting {
 	private $varname;
+	private $title;
 	private $value;
 	private $defaultvalue;
 	private $datatype;
 	private $group;
+	private $priority;
+	private $type;
+	private $is_hidden;
+	private $not_edit;
 	
 	// set get varname
 	public function setvarname($varname) {
@@ -26,13 +31,6 @@ class option_setting {
 	}
 	public function getgroup() {
 		return $this->group;
-	}
-	// set get permission
-	public function setpermission($permission) {
-		$this->permission = $permission;
-	}
-	public function getpermission() {
-		return $this->permission;
 	}
 	public function update(){
 		global $db;

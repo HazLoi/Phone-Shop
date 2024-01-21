@@ -6,7 +6,7 @@ $pass_sql       = '';
 $database       = 'project_'.$db_pos.'';
 
 $db     	= new db();
-$option_setting  = new option_setting();
+$setting  = new setting();
 $db->setUsername ( $user_sql );
 $db->setPassword ( $pass_sql );
 $db->setServer ( $server_sql );
@@ -21,6 +21,6 @@ $tpldirect 	= __DIR__.'/../templates/';
 
 $st->assign('folder', 'web');
 
-$setup = $option_setting->showall();
+$setup = $setting->showall();
 $st->assign('setup', $setup);
 $st->assign('db_pos', $db_pos);

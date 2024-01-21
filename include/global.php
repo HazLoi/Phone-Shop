@@ -301,8 +301,8 @@ class main {
 
 		$sql = '';
 		//lay gio bat dau cua he thong nay
-		$option_setting = new option_setting();
-		$setup = $option_setting->showall();
+		$setting = new setting();
+		$setup = $setting->showall();
 
 		if( $from <= $setup['begin_time']){
 			$from = $setup['begin_time'];
@@ -339,8 +339,8 @@ class main {
 
 		$sql = '';
 		//lay gio bat dau cua he thong nay
-		$option_setting = new option_setting();
-		$setup = $option_setting->showall();
+		$setting = new setting();
+		$setup = $setting->showall();
 
 		if( $from <= $setup['begin_time']){
 			$from = $setup['begin_time'];
