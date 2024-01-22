@@ -1,8 +1,8 @@
 <?php
 
 if( $act == 'index' ){
-	$meta_title .= '404 lỗi đường dẫn không tồn tại';
-	
+	$title .= '404 lỗi đường dẫn không tồn tại';
+	$st->assign('title', $title);
 }else{
-	$main->redirect($domain);
+	$main->redirect($page_404);
 }

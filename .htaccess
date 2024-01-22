@@ -32,7 +32,6 @@ RewriteRule ^dang-ky-tai-khoan/(.*)$ /?m=user&act=register&user_id=$1 [L]
 RewriteRule ^quan-ly-don-hang$ /?m=user&act=order [L]
 RewriteRule ^thong-bao$ /?m=user&act=notification [L]
 RewriteRule ^gioi-thieu$ /?m=about&act=index [L]
-RewriteRule ^404$ /?m=orther&act=index [L]
 
 #url theo ecosite
 RewriteRule ^san-pham$ /?m=product&act=index [L]
@@ -58,66 +57,26 @@ RewriteRule ^(.*)-d([0-9]+)$ /?m=news&act=detail&link=$1&id=$2 [L]
 RewriteRule ^(.*)-d([0-9]+)/$ /?m=news&act=detail&link=$1&id=$2 [L]
 # RewriteRule ^tin-tuc/keyword=(.*)$ /?m=news&act=search&keyword=$1 [L]
 RewriteRule ^tin-tuc?keyword=(.*)$ /?m=news&act=search&keyword=$1 [L]
-#end url theo ecosite
 
-RewriteRule ^album$ /?m=album&act=index [L]
-RewriteRule ^album/$ /?m=album&act=index [L]
-RewriteRule ^album/([0-9]+)$ /?m=album&act=index&page=$1 [L]
-RewriteRule ^album/([0-9]+)/$ /?m=album&act=index&page=$1 [L]
-RewriteRule ^(.*)-e([0-9]+)$ /?m=album&act=index&link=$1&id=$2 [L]
-RewriteRule ^(.*)-e([0-9]+)/$ /?m=album&act=index&link=$1&id=$2 [L]
-RewriteRule ^(.*)-f([0-9]+)$ /?m=album&act=detail&link=$1&id=$2 [L]
-RewriteRule ^(.*)-f([0-9]+)/$ /?m=album&act=detail&link=$1&id=$2 [L]
-# RewriteRule ^album/keyword=(.*)$ /?m=album&act=search&keyword=$1 [L]
-RewriteRule ^album?keyword=(.*)$ /?m=album&act=search&keyword=$1 [L]
+#menu
+RewriteRule ^dien-thoai-galaxy$ /?m=galaxy&act=index [L]
+RewriteRule ^galaxy-s$ /?m=galaxy&act=galaxy_s [L]
+RewriteRule ^galaxy-a$ /?m=galaxy&act=galaxy_a [L]
+RewriteRule ^galaxy-z$ /?m=galaxy&act=galaxy_z [L]
+RewriteRule ^galaxy-m$ /?m=galaxy&act=galaxy_m [L]
+RewriteRule ^galaxy-watch$ /?m=galaxy&act=watch [L]
+RewriteRule ^galaxy-watch-5$ /?m=galaxy&act=watch_5 [L]
+RewriteRule ^galaxy-watch-6$ /?m=galaxy&act=watch_6 [L]
+RewriteRule ^galaxy-tab$ /?m=galaxy&act=tab [L]
+RewriteRule ^galaxy-tab-s$ /?m=galaxy&act=tab_s [L]
+RewriteRule ^galaxy-tab-a$ /?m=galaxy&act=tab_a [L]
+RewriteRule ^galaxy-buds$ /?m=galaxy&act=buds [L]
+RewriteRule ^phu-kien$ /?m=galaxy&act=accessory [L]
+RewriteRule ^op-lung$ /?m=galaxy&act=accessory_case [L]
+RewriteRule ^sac-du-phong$ /?m=galaxy&act=accessory_backup_charger [L]
+RewriteRule ^hot-sale$ /?m=galaxy&act=hot_sale [L]
+RewriteRule ^404$ /?m=404&act=index [L]
 
-RewriteRule ^video$ /?m=video&act=index [L]
-RewriteRule ^video/$ /?m=video&act=index [L]
-RewriteRule ^video/([0-9]+)$ /?m=video&act=index&page=$1 [L]
-RewriteRule ^video/([0-9]+)/$ /?m=video&act=index&page=$1 [L]
-RewriteRule ^(.*)-g([0-9]+)$ /?m=video&act=index&link=$1&id=$2 [L]
-RewriteRule ^(.*)-g([0-9]+)/$ /?m=video&act=index&link=$1&id=$2 [L]
-RewriteRule ^(.*)-h([0-9]+)$ /?m=video&act=detail&link=$1&id=$2 [L]
-RewriteRule ^(.*)-h([0-9]+)/$ /?m=video&act=detail&link=$1&id=$2 [L]
-# RewriteRule ^video/keyword=(.*)$ /?m=video&act=search&keyword=$1 [L]
-RewriteRule ^video?keyword=(.*)$ /?m=video&act=search&keyword=$1 [L]
-
-RewriteRule ^bai-viet$ /?m=article&act=index [L]
-RewriteRule ^bai-viet/$ /?m=article&act=index [L]
-RewriteRule ^bai-viet/([0-9]+)$ /?m=article&act=index&page=$1 [L]
-RewriteRule ^bai-viet/([0-9]+)/$ /?m=article&act=index&page=$1 [L]
-RewriteRule ^(.*)-j([0-9]+)$ /?m=article&act=detail&link=$1&id=$2 [L]
-RewriteRule ^(.*)-j([0-9]+)/$ /?m=article&act=detail&link=$1&id=$2 [L]
-# RewriteRule ^bai-viet/keyword=(.*)$ /?m=article&act=search&keyword=$1 [L]
-RewriteRule ^bai-viet?keyword=(.*)$ /?m=article&act=search&keyword=$1 [L]
-
-#url card
-#RewriteRule ^c/(.*)$ /?m=card&act=index&id=$1 [L]
-#RewriteRule ^c/(.*)/$ /?m=card&act=index&id=$1 [L]
-RewriteRule ^m/(.*)$ /?m=card&act=detail&token=$1 [L]
-RewriteRule ^m/(.*)/$ /?m=card&act=detail&token=$1 [L]
-RewriteRule ^chinh-sua-thong-tin-card$ /?m=card&act=edit&id=$1 [L]
-RewriteRule ^chinh-sua-thong-tin-card/$ /?m=card&act=edit&id=$1 [L]
-# dành riêng cho mkc
-RewriteRule ^(.*).vndx$ /?m=card&act=index&id=$1 [L]
-RewriteRule ^(.*).vndx/$ /?m=card&act=index&id=$1 [L]
-# end dành riêng cho mkc
-RewriteRule ^pro/(.*)$ /?m=card&act=index&id=$1 [L]
-RewriteRule ^pro/(.*)/$ /?m=card&act=index&id=$1 [L]
-RewriteRule ^v/(.*)$ /?m=card&act=view&id=$1 [L]
-RewriteRule ^v/(.*)/$ /?m=card&act=view&id=$1 [L]
-
-# MOMO
-RewriteRule ^thong-tin-chi-tiet-don-hang$ /?m=cart&act=order_detail [L]
-
-#config deeplink multi domain for sees
-#RewriteRule ^apple-app-site-association$ /deeplinkhandle.php/?app_os=iOS [L]
-#RewriteRule ^.well-known/assetlinks.json$ /deeplinkhandle.php/?app_os=Android [L]
-
-# admin website
-# DDT
-#RewriteCond %{HTTP_HOST} ^http://(www\.)?daidongtienwebs\.sees.vn/$ [NC]
-#RewriteCond %{HTTP_HOST} ^web_erp\.local$ [NC]
 RewriteRule ^(([^/]+/)*[^.]+)$ /?m=redirect&act=index [L]
 
 </IfModule>

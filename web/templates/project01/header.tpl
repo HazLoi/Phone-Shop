@@ -13,29 +13,46 @@
     <link href="{$domain}public/css/jquery.datetimepicker.css" rel="stylesheet">
     <link href="{$domain}public/css/jquery.datetimepicker.min.css" rel="stylesheet">
     <link href="{$domain}public/css/vanillaSelectBox.css" rel="stylesheet">
-    <link href="{$domain}public/css/font-awesome.css" rel="stylesheet">
+    <link href="{$domain}public/css/main.css" rel="stylesheet">
+    {* <link href="{$domain}public/css/font-awesome.css" rel="stylesheet"> *}
 </head>
 <body>
-    <div class="header" style="background-color: #456570;">
+    <div class="header" style="background-color: #172226;">
         <div class="header-main">
             <div class="container">
                 <div class="row">
                     <div class="col-md-1 col-sm-1 col-xs-12 logo">
-                        <img src="{$domain}public/images/favicon-removebg-preview.png" width="80px" height="80px" alt="">
+                        <a href="/">
+                            <img src="{$domain}public/images/favicon-removebg-preview.png" width="80px" height="84px" alt="">
+                        </a>
                     </div>
-                    <div class="col-md-8 col-sm-8 col-xs-12 menu">
+                    {* Thanh menu ở đây *}
+                    <div class="col-md-10 col-sm-10 col-xs-12 menu">
                         <div class="header-menu">
                             <div class="container">
-                                <div class="header-menu">
+                                <div class="header-menu1 d-flex justify-content-center">
                                     <div class="menu-top">
-                                        {* {include file="`$tpldirect`menu/menu_top.tpl"} *}
+                                        {include file="`$tpldirect`menu/menu_top.tpl" menu=$menu}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-12 menu">
-
+                    {* Icon thông tin như profile, cart, notification ở đây *}
+                    <div class="col-md-1 col-sm-1 col-xs-12">
+                        <div class="container">
+                            <div class="mt-3 d-flex justify-content-center header-icon">
+                                <div class="ms-1 me-1 mt-3">
+                                    <i style="font-size: 20px;" class="fa-solid fa-bag-shopping"></i>
+                                </div>
+                                <div class="ms-1 me-1 mt-3">
+                                    <i style="font-size: 20px;" class="fa-regular fa-user"></i>
+                                </div>
+                                <div class="ms-1 me-1 mt-3">
+                                    <i style="font-size: 20px;" class="fa-regular fa-bell"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
