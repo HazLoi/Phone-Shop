@@ -17,11 +17,11 @@ if(isset($dataStore['pos_type']) ){
 	$pos_created 			= $dataStore['created_at'];
 	$_SESSION['db_pos'] 	= $db_pos;
 	$globalSetup 			= $main->globalSetup();			
-	if( $dataStore['pos_type'] == 'admin'  ){
+	if($dataStore['pos_type'] == 'admin'){
 		if(isset($dataStore['source']) && $dataStore['source'] != '' ){
 			include ($dataStore['source'].'/index.php');
 		}
-	}elseif($dataStore['pos_type'] == 'web'  ){
+	}elseif($dataStore['pos_type'] == 'web'){
 		if(isset($dataStore['db']) && $dataStore['db'] != ''){
 			$db_pos = $dataStore['db'];
 			if(isset($dataStore['source']) && $dataStore['source'] != '' ){

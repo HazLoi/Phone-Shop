@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2024-01-22 15:15:08
+<?php /* Smarty version Smarty-3.1.18, created on 2024-01-23 09:44:40
          compiled from "D:\a_project_2024\phone_shop\web\templates\project01\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:73456373065ab726498b225-09947948%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '11922d183139b1bbf3f2539192b6272a91f5c881' => 
     array (
       0 => 'D:\\a_project_2024\\phone_shop\\web\\templates\\project01\\header.tpl',
-      1 => 1705911307,
+      1 => 1705977880,
       2 => 'file',
     ),
   ),
@@ -78,7 +78,7 @@ public/images/favicon-removebg-preview.png" width="80px" height="84px" alt="">
                     
                     <div class="col-md-1 col-sm-1 col-xs-12">
                         <div class="container">
-                            <div class="mt-3 d-flex justify-content-center header-icon">
+                            <div class="mt-3 header-icon">
                                 <div class="ms-1 me-1 mt-3">
                                     <i style="font-size: 20px;" class="fa-solid fa-bag-shopping"></i>
                                 </div>
