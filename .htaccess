@@ -8,7 +8,6 @@ RewriteBase /
 
 #url tong quan
 RewriteRule ^login$ /?m=user&act=login [L]
-RewriteRule ^admin-quanly$ /?m=user&act=staff_login [L]
 
 RewriteRule ^trang-chu$ /?m=home&act=index [L]
 RewriteRule ^gio-hang$ /?m=cart&act=index [L]
@@ -76,6 +75,12 @@ RewriteRule ^op-lung$ /?m=galaxy&act=accessory_case [L]
 RewriteRule ^sac-du-phong$ /?m=galaxy&act=accessory_backup_charger [L]
 RewriteRule ^hot-sale$ /?m=galaxy&act=hot_sale [L]
 RewriteRule ^404$ /?m=404&act=index [L]
+
+# Phần quản lý htaccess admin
+RewriteRule ^a-trang-chu$ /?m=home&act=index [L]
+RewriteRule ^a-quan-ly-menu$ /?m=manage&act=menu [L]
+RewriteRule ^a-quan-ly-nhan-vien$ /?m=manage&act=user [L]
+
 
 RewriteRule ^(([^/]+/)*[^.]+)$ /?m=redirect&act=index [L]
 
