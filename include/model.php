@@ -136,7 +136,9 @@ class model{
 	}
 
 	public function print_r_($str) {
+		echo "<pre>";
 		print_r( $str );
+		echo "</pre>";
 		return false;
 	}
 

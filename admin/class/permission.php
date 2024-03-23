@@ -1,89 +1,115 @@
 <?php
-class gid extends model {
-	protected $class_name = 'gid';
-	protected $id;
-	protected $name;
-	protected $default_permission;
-	protected $default_report;//default_report_permission
-	protected $permission_resellers;//permission_resellers
-	protected $shop_accessed;//shop_accessed: cửa hàng được phép truy cập
-	protected $bank_change_allow;//Danh sách ngân hàng cho phép xem số dư thay đổi
-	protected $treasurer_allow_all;//On/off = 0|| 1 => chỉ người tạo mới xem được đơn mình tạo
+class permission extends model
+{
+	protected $class_name = 'permission';
+	protected $id; // id của menu
+	protected $root; // id menu cha
+	protected $title; // tiêu đề
+	protected $permission; // ví dụ m:report, act:delivery_showroom và trong file phpjquery có dùng act:idx => :reportdelivery_showroom:report_delivery_showroomidx:
+	protected $list_permission; // Quên rồi để xem lại
+	protected $is_hidden; // !=0 là ẩn 
+	protected $is_menu; // =0 là phân quyền, !=0 là menu
+	protected $m; // ?m=...&act=... link domain => m
+	protected $act; // ?m=...&act=... link domain => act
+	protected $link; // ?m=...&act=...
+	protected $icon; // icon của menu
+	protected $priority; // mức độ ưu tiên
+	protected $description; // mô tả cho menu
 	
-	public function add(){
+	//Load menu to show
+	public function menu_load($is_hidden){
 		global $db;
-		
-		$arr['name'] 					= $this->get('name');
-		$arr['permission_resellers'] 	= '';
-		$arr['default_permission'] 		= '';
-		$arr['default_report']	 		= '';
-		$arr['shop_accessed']	 		= '';
-		$db->record_insert( $db->tbl_fix.'`'.$this->class_name.'`', $arr );
-		
-		return $db->mysqli_insert_id();
-	}
-	
-	public function update(){
-		global $db;
-		$id = $this->get('id');
-		
-		if( $this->get('name') ) 				$arr['name'] 				= $this->get('name');
-		
-		$db->record_update( $db->tbl_fix.'`'.$this->class_name.'`', $arr, " `id` = '$id' " );
-		return true;
-	}
-	
-	public function update_permission(){
-		global $db;
-		$id = $this->get('id');
-		
-		$arr['default_permission'] 	= $this->get('default_permission');
-		$arr['default_report'] 		= $this->get('default_report');
-		$arr['shop_accessed'] 		= $this->get('shop_accessed');
-		
-		$db->record_update( $db->tbl_fix.'`'.$this->class_name.'`', $arr, " `id` = '$id' " );
-		return true;
-	}
-	
-	public function get_string_permission( $lstring ){//id;id1;id2;
-		global $db;
-		
-		$sqlWhere = '';
-		$l = explode(';', $lstring);
-		
-		foreach ($l as $key => $id) {
-			$sqlWhere .= " `id` = '$id' OR ";
+
+		$sqlHidden = '';
+		if ($is_hidden != '') {
+			$sqlHidden = " AND `is_hidden` = '$is_hidden' ";
 		}
 
-		if( $sqlWhere != '' ){
+		//Mục bán hàng
+		$sql = "SELECT `id`, `title`, `is_hidden`, `link`, `m`, `act`, `root`, `icon` FROM $db->tbl_fix`permission`
+				WHERE `root` = '0'
+				$sqlHidden
+				AND `is_menu` = '1'
+				ORDER BY `priority` ASC
+				";
 
-			$sqlWhere = substr($sqlWhere, 0, -3);
-			
-			$sql = "SELECT `permission`.`permission` FROM ".$db->tbl_fix."`permission` WHERE $sqlWhere";
-			
-			$result = $db->executeQuery( $sql );
+		$r = $db->executeQuery($sql);
+		$arr = array();
+		while ($row = mysqli_fetch_assoc($r)) {
+			$row['subItems'] = $this->menu_load_sub($row['id'], $is_hidden);
+			$arr[] = $row;
+		}
+		return $arr;
+	}
 
-			$s = '';
-			while( $row = mysqli_fetch_assoc($result) ){
-				$s .= $row['permission'].';';
+
+	public function menu_load_sub($root_id, $is_hidden){
+		global $db;
+
+		$sqlHidden = '';
+		if ($is_hidden != '') {
+			$sqlHidden = " AND `is_hidden` = '$is_hidden' ";
+		}
+
+		//Mục bán hàng
+		$sql = "SELECT `id`, `root`, `title`, `is_hidden`, `m`, `act`, `url_domain`, `icon` FROM $db->tbl_fix`permission`
+				WHERE `root` = '$root_id'
+				$sqlHidden
+				AND `is_menu` = '1'
+				ORDER BY `priority` 
+				";
+
+		$r = $db->executeQuery($sql);
+
+		$arr = array();
+		while ($row = mysqli_fetch_assoc($r)) {
+			$row['subItems'] = $this->menu_load_sub($row['id'], $is_hidden);
+			$arr[] 			 = $row;
+		}
+
+		return $arr;
+	}
+
+	// update thông tin menu
+	public function menu_update($lIDs, $is_hidden){
+		global $db;
+
+		$sqlIDs = '';
+		$lIDs = explode(';', $lIDs);
+		if (COUNT($lIDs) > 0) {
+			foreach ($lIDs as $ite) {
+				if ($ite != '') {
+					$sqlIDs .= " `id` = '$ite' OR ";
+				}
 			}
-			
-			return $s.':useridx:';
-		}else{
-			return ':useridx:';
+
+			if ($sqlIDs != '') {
+				$sqlIDs = "(" . substr($sqlIDs, 0, -3) . ") AND (`is_menu` = 1 OR `is_menu` = 2)";
+				$arr['is_hidden'] = $is_hidden;
+				$db->record_update("$db->tbl_fix`permission`", $arr, $sqlIDs);
+
+				//List toàn bộ danh sách quyền con và ẩn theo luôn
+				$sql = "SELECT `list_permission` FROM $db->tbl_fix`permission`
+						WHERE $sqlIDs ";
+				$lPer = $db->executeQuery_list($sql);
+				$sqlPers = '';
+				foreach ($lPer as $item) {
+					$lPerArr = explode(';', $item['list_permission']);
+					foreach ($lPerArr as $itePer) {
+						if ($itePer != '') {
+							$sqlPers .= " `id` = '$itePer' OR ";
+						}
+					}
+				}
+
+				if ($sqlPers != '') {
+					$sqlPers = "(" . substr($sqlPers, 0, -3) . ") AND `is_menu` = 0";
+					$arr['is_hidden'] = $is_hidden;
+					$db->record_update("$db->tbl_fix`permission`", $arr, $sqlPers);
+				}
+			}
 		}
-    }
-    
-    public function opt_all(){
-		global $db;
-		$l = $this->list_all();
-        
-        $opt = '';
-        foreach($l as $key => $item ){
-            $opt .= '<option value="'.$item['id'].'">'.$item['name'].'</option>';
-        }
-        
-		return $opt;
+
+		return true;
 	}
-	
 }

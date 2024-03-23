@@ -14,12 +14,12 @@ $db->setDatabase ( $database );
 $db->tbl_fix    = $database.'.';
 
 $link 		= $domain_http_type.$_SERVER['SERVER_NAME'].'/';
-$tpldomain 	= $domain_http_type.$_SERVER['SERVER_NAME'].'/web/';
+$tpldomain 	= $domain_http_type.$_SERVER['SERVER_NAME'].'/admin/';
 $rewrite_url 	= $domain_http_type.$_SERVER['SERVER_NAME'].'/';
-$subdirect 	= '/web';
+$subdirect 	= '/admin';
 $tpldirect 	= __DIR__.'/../templates/'; 
 
-$st->assign('folder', 'web');
+$st->assign('folder', 'admin');
 
 $setup = $setting->showall();
 $st->assign('setup', $setup);

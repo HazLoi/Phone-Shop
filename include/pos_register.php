@@ -863,4 +863,3 @@ class pos_register extends model{
 		return $kq;
 	}
 }
-

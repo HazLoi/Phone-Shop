@@ -14,6 +14,37 @@ if($act == ''){
 	$act = 'index';
 }
 
+$permission = new permission();
+$lPermission = $permission->menu_load('');
+$st->assign('lPermission', $lPermission);
+
+if(!isset($_SESSION['username']) || !isset($_SESSION['pass']) ) {
+	if(isset($_COOKIE['username']) && isset($_COOKIE['pass'])){
+		$dUser = $user->get_detail($_COOKIE['username']);
+		if( $duser['status'] == 'Active' && $dUser['password'] == $_COOKIE['pass'] ){
+			$_SESSION['username'] 	= $dUser['username'];
+			$_SESSION['fullname'] 	= $dUser['fullname'];
+			$_SESSION['pass'] 		= $dUser['password'];
+			$_SESSION['shop_id'] 	= $dUser['shop_id'];
+			$_SESSION['gid'] 		= $dUser['gid'];
+			setcookie('username', $_SESSION['username'], time() + 640000);
+			setcookie('pass', $_SESSION['pass'], time() + 640000);
+			setcookie('temp_area', @$_SESSION['temp_area'], time() + 640000);
+			setcookie($_SESSION['username'].'_security', $dUser['security'] , time() + 6400000);
+		}
+	}
+
+}else{
+	unset($_SESSION['username']);
+	unset($_SESSION['password']);
+	unset($_SESSION['shop_id']);
+
+	$main->alert( $lang['nt_closedShift'] );
+	$main->redirect($link.'/?m=user&act=login');
+	$db->close();
+	exit();
+}
+
 $_SESSION['lang'] = 'vi';
 include 'lang/vi/home.php';
 

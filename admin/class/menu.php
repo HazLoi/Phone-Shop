@@ -1,132 +1,125 @@
 <?php
-class menu extends model{
-    
+class menu extends model
+{
+
 	protected $class_name = "menu";
-   protected $id; // id của menu
-   protected $name; // tên menu
-   protected $type_link; // menu thuộc loại gì ví dụ: là "danh mục sản phẩm" thì loại "category"
-   protected $link; // link của menu ví dụ: /tin-tuc, /trang-chu, /san-pham
-   protected $description; // mô tả của menu
-   protected $icon; // icon
-   protected $root_id; // id của menu cha
-   protected $level; // level của menu ví dụ: 1 là cao nhất là Ông, 2 là Cha, 3 là Cháu
-   protected $type; // loại menu ví dụ: 0 là menu trên, 1 là menu dưới
-   protected $open_page; // hình như mở trang như: _self, _blank
-   protected $priority; // mức độ ưu tiên
-   protected $is_hidden; // != là menu ẩn
-   protected $delete; // != 0 là menu bị xóa
-   protected $shop_id; // menu thuộc shop_id nào
-   protected $avatar; // ảnh menu
-   protected $background; // nền menu
-   protected $theme_id; // vẫn chưa biết dùng làm gì ( có thể bỏ đi )
-   protected $type_cat; // vẫn chưa biết dùng làm gì ( có thể bỏ đi )
-   protected $type_value; // vẫn chưa biết dùng làm gì ( có thể bỏ đi )
+	protected $id; // id của menu
+	protected $name; // tên menu
+	protected $link; // link của menu ví dụ: /tin-tuc, /trang-chu, /san-pham
+	protected $description; // mô tả của menu
+	protected $icon; // icon
+	protected $root_id; // id của menu cha
+	protected $level; // level của menu ví dụ: 1 là cao nhất là Ông, 2 là Cha, 3 là Cháu
+	protected $open_page; // hình như mở trang như: _self, _blank
+	protected $priority; // mức độ ưu tiên
+	protected $is_hidden; // != 0 là menu ẩn
+	protected $delete; // != 0 là menu bị xóa
+	protected $background; // nền menu
 
 	// Thêm menu mới
-	public function add(){
-		 global $db;
+	public function add()
+	{
+		global $db;
 
-		 $arr['name']                    = $this->get('name');
-		 $arr['type_link']               = $this->get('type_link');
-		 $arr['link']                    = $this->get('link');
-		 $arr['description']             = $this->get('description');
-		 $arr['icon']                    = $this->get('icon');
-		 $arr['avatar']                  = $this->get('avatar');
-		 $arr['background']              = $this->get('background');
-		 $arr['root_id']                 = $this->get('root_id');
-		 $arr['level']                   = $this->get('level');
-		 $arr['type']                    = $this->get('type');
-		 $arr['type_cat']                = $this->get('type_cat');
-		 $arr['type_value']              = $this->get('type_value');
-		 $arr['open_page']               = $this->get('open_page');
-		 $arr['priority']                = $this->get('priority');
-		 $arr['description']             = $this->get('description');
-		 $arr['is_hidden']               = $this->get('is_hidden') + 0;
-		 $arr['delete']                  = $this->get('delete') + 0;
-		 $arr['shop_id']                 = $this->get('shop_id');
-		 $arr['theme_id']                = $this->get('theme_id');
-		 
-		 $db->record_insert($db->tbl_fix . $this->class_name, $arr);
+		$arr['name']                    = $this->get('name');
+		$arr['link']                    = $this->get('link');
+		$arr['description']             = $this->get('description');
+		$arr['icon']                    = $this->get('icon');
+		$arr['background']              = $this->get('background');
+		$arr['root_id']                 = $this->get('root_id');
+		$arr['level']                   = $this->get('level');
+		$arr['open_page']               = $this->get('open_page');
+		$arr['priority']                = $this->get('priority');
+		$arr['description']             = $this->get('description');
+		$arr['is_hidden']               = $this->get('is_hidden') + 0;
+		$arr['delete']                  = $this->get('delete') + 0;
 
-		 return $db->mysqli_insert_id();
+		$db->record_insert($db->tbl_fix . $this->class_name, $arr);
+
+		return $db->mysqli_insert_id();
 	}
 
 	// Cập nhật menu
-	public function update(){
-		 global $db;
-		 
-		 $id                             = $this->get('id');
+	public function update()
+	{
+		global $db;
 
-		 $arr['name']                    = $this->get('name');
-		 $arr['type_link']               = $this->get('type_link');
-		 $arr['link']                    = $this->get('link');
-		 $arr['description']             = $this->get('description');
-		 $arr['icon']                    = $this->get('icon');
-		 $arr['avatar']                  = $this->get('avatar');
-		 $arr['background']              = $this->get('background');
-		 $arr['root_id']                 = $this->get('root_id');
-		 $arr['level']                   = $this->get('level');
-		 $arr['type']                    = $this->get('type');
-		 $arr['type_cat']                = $this->get('type_cat');
-		 $arr['type_value']              = $this->get('type_value');
-		 $arr['open_page']               = $this->get('open_page');
-		 $arr['priority']                = $this->get('priority');
-		 $arr['description']             = $this->get('description');
-		 $arr['is_hidden']               = $this->get('is_hidden') + 0;
-		 $arr['delete']                  = $this->get('delete') + 0;
-		 $arr['shop_id']                 = $this->get('shop_id');
-		 $arr['theme_id']                = $this->get('theme_id');
+		$id                             = $this->get('id');
 
-		 $db->record_update($db->tbl_fix . $this->class_name, $arr, " `id` = '$id' ");
+		$arr['name']                    = $this->get('name');
+		$arr['link']                    = $this->get('link');
+		$arr['description']             = $this->get('description');
+		$arr['icon']                    = $this->get('icon');
+		$arr['background']              = $this->get('background');
+		$arr['root_id']                 = $this->get('root_id');
+		$arr['level']                   = $this->get('level');
+		$arr['open_page']               = $this->get('open_page');
+		$arr['priority']                = $this->get('priority');
+		$arr['description']             = $this->get('description');
+		$arr['is_hidden']               = $this->get('is_hidden') + 0;
+		$arr['delete']                  = $this->get('delete') + 0;
 
-		 return true;
+		$db->record_update($db->tbl_fix . $this->class_name, $arr, " `id` = '$id' ");
+
+		return true;
 	}
 
 	// Lấy ra toàn bộ menu
-	public function list_menu(){
+	public function list_menu()
+	{
 		global $db;
 
 		$sql = "SELECT *
 					FROM $db->tbl_fix$this->class_name 
 					WHERE `is_hidden` = '0' 
 					AND `delete` = '0'
+					ORDER BY `priority`
 				";
 
 		$result = $db->executeQuery($sql);
 		$kq = array();
-		while($row = mysqli_fetch_assoc( $result )){
+		while ($row = mysqli_fetch_assoc($result)) {
 			$this->set('root_id', $row['id']);
 			$sub_list = $this->list_by_root();
-			if(COUNT($sub_list) > 0){
+			if (COUNT($sub_list) > 0) {
 				$row['root_menu'] = $this->list_sub();
-			}else{
+			} else {
 				$row['root_menu'] = [];
 			}
 			$kq[] = $row;
 		}
 		return $kq;
-	} 
+	}
 
 	// Lấy ra những menu từ menu Cha nếu có
-	public function list_sub(){
+	public function list_sub()
+	{
 		global $db;
 
-		$root_id = $this->get('root_id');
+		$root_id 	= $this->get('root_id');
+		$is_hidden 	= $this->get('is_hidden');
+
+		if ($is_hidden != '') {
+			$is_hidden = " AND `is_hidden` = '$is_hidden' ";
+		} else {
+			$is_hidden = "";
+		}
 
 		$sql = "SELECT *
 					FROM $db->tbl_fix$this->class_name 
-					WHERE `is_hidden` = '0' 
-					AND `delete` = '0'
+					WHERE `delete` = '0'
 					AND `root_id` = '$root_id'
+					$is_hidden
 				";
+
 		$result = $db->executeQuery($sql);
 		$kq = array();
-		while($row = mysqli_fetch_assoc( $result )){
+		while ($row = mysqli_fetch_assoc($result)) {
 			$this->set('root_id', $row['id']);
 			$sub_list = $this->list_by_root();
-			if(COUNT($sub_list) > 0){
+			if (COUNT($sub_list) > 0) {
 				$row['root_menu'] = $this->list_sub();
-			}else{
+			} else {
 				$row['root_menu'] = [];
 			}
 			$kq[] = $row;
@@ -135,23 +128,196 @@ class menu extends model{
 	}
 
 	// Lấy ra danh sách menu con thuộc menu Cha nếu có
-	public function list_by_root(){
+	public function list_by_root()
+	{
 		global $db;
 
-		$root_id = $this->get('root_id');
+		$root_id 		= $this->get('root_id');
+		$is_hidden  	= $this->get('is_hidden');
+
+		if ($is_hidden != '') {
+			$is_hidden = " AND `is_hidden` = '$is_hidden' ";
+		} else {
+			$is_hidden = "";
+		}
 
 		$sql = "SELECT *
 					FROM $db->tbl_fix$this->class_name
-					WHERE `is_hidden` = '0'
-					AND `delete` = '0'
+					WHERE `delete` = '0'
 					AND `root_id` = '$root_id'
+					$is_hidden
 				";
 
 		$rsl = $db->executeQuery($sql);
 		$kq = array();
-		while($row = mysqli_fetch_assoc( $rsl )){
+		while ($row = mysqli_fetch_assoc($rsl)) {
 			$kq[] = $row;
 		}
 		return $kq;
 	}
-} 
+
+	// tìm menu theo id
+	public function get_detail_by_id()
+	{
+		global $db;
+
+		$id = $this->get('id');
+
+		$sql = "SELECT * FROM $db->tbl_fix`$this->class_name` WHERE `id` = '$id' ";
+
+		$result = $db->executeQuery($sql, 1);
+
+		return $result;
+	}
+
+	// Kiểm tra tên menu đã tồn tại chưa
+	public function check_exists()
+	{
+		global $db;
+
+		$name = $this->get('name');
+
+		$sql = "SELECT * FROM $db->tbl_fix`$this->class_name` WHERE `name` = '$name'";
+
+		$result = $db->executeQuery($sql, 1);
+
+		return $result;
+	}
+
+	// lọc danh sách menu lấy menu cha
+	public function filter($keyword, $offset, $limit)
+	{
+		global $db;
+
+		$is_hidden    	= $this->get('is_hidden');
+
+		if ($keyword != '') {
+			$keyword = " AND `name` LIKE '%$keyword%' ";
+		}
+
+		if ($is_hidden != '') {
+			$is_hidden = "AND `is_hidden` = '$is_hidden' ";
+		} else {
+			$is_hidden = '';
+		}
+
+		if ($limit != '') {
+			$limit = " LIMIT $offset, $limit";
+		}
+
+		$sql = "SELECT *
+						FROM $db->tbl_fix`$this->class_name`
+						WHERE `delete` = 0
+						AND `root_id` = 0
+						$is_hidden
+						$keyword
+						ORDER BY `priority` DESC
+						$limit
+						";
+
+		$result = $db->executeQuery($sql);
+		$kq = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			$this->set('root_id', $row['id']);
+			$sub_list = $this->list_by_root();
+			if (COUNT($sub_list) > 0) {
+				$row['root_menu'] = $this->list_sub();
+			} else {
+				$row['root_menu'] = [];
+			}
+			$kq[] = $row;
+		}
+		return $kq;
+	}
+
+	// đếm danh sách menu cha
+	public function filter_count($keyword)
+	{
+		global $db;
+
+		$is_hidden    	= $this->get('is_hidden');
+
+		if ($keyword != '') {
+			$keyword = " AND ( `name` LIKE '%$keyword%' ) ";
+		}
+
+		if ($is_hidden != '') {
+			$is_hidden = " AND `is_hidden` = '$is_hidden' ";
+		} else {
+			$is_hidden = "";
+		}
+
+		$sql = "SELECT count(*) total
+						FROM $db->tbl_fix$this->class_name
+						WHERE `delete` = 0
+						AND `root_id` = 0
+						$is_hidden
+						$keyword
+						";
+
+		$result = $db->executeQuery($sql, 1);
+
+		return $result['total'] + 0;
+	}
+
+	// ẩn/hiện menu
+	function update_hidden()
+	{
+		global $db;
+
+		$id                    = $this->get('id');
+		$arr['is_hidden']      = $this->get('is_hidden');
+
+		$this->set('root_id', $id);
+		$this->set('is_hidden', '');
+		$l = $this->list_by_root(); //Lấy list con
+
+		$db->record_update($db->tbl_fix . $this->class_name, $arr, " `id` = '$id' ");
+
+		if (COUNT($l) > 0) {
+			foreach ($l as $value) {
+				$this->set('root_id', $value['id']);
+				$this->set('is_hidden', '');
+				$sList = $this->list_by_root();
+				if (COUNT($sList) > 0) {
+					$this->set('id', $value['id']);
+					$this->set('is_hidden', $arr['is_hidden']);
+					$this->update_hidden();
+				} else {
+					$db->record_update($db->tbl_fix . $this->class_name, $arr, " `id` = '" . $value['id'] . "' ");
+				}
+			}
+		}
+
+		return true;
+	}
+
+	// Xóa menu
+	function delete_menu()
+	{
+		global $db;
+
+		$id                 = $this->get('id');
+		$arr['delete']      = time();
+
+		$this->set('root_id', $id);
+		$l = $this->list_by_root(); //Lấy list con
+
+		$db->record_update($db->tbl_fix . $this->class_name, $arr, " `id` = '$id' ");
+
+		if (COUNT($l) > 0) {
+			foreach ($l as $value) {
+				$this->set('root_id', $value['id']);
+				$sList = $this->list_by_root();
+				if (COUNT($sList) > 0) {
+					$this->set('id', $value['id']);
+					$this->delete_menu();
+				} else {
+					$db->record_update($db->tbl_fix . $this->class_name, $arr, " `id` = '" . $value['id'] . "' ");
+				}
+			}
+		}
+
+		return true;
+	}
+}
