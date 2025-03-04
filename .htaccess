@@ -80,6 +80,7 @@ RewriteRule ^404$ /?m=404&act=index [L]
 RewriteRule ^a-trang-chu$ /?m=home&act=index [L]
 RewriteRule ^a-quan-ly-menu$ /?m=manage&act=menu [L]
 RewriteRule ^a-quan-ly-nhan-vien$ /?m=manage&act=user [L]
+RewriteRule ^a-cai-dat$ /?m=manage&act=setting [L]
 
 
 RewriteRule ^(([^/]+/)*[^.]+)$ /?m=redirect&act=index [L]

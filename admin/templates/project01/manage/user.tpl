@@ -6,8 +6,8 @@
 				<div class="col-md-2 col-lg-2">
 					<select class="form-select" id="menu_is_hidden">
 						<option value="">Trạng thái</option>
-						<option value="0">Hiện</option>
-						<option value="1">Ẩn</option>
+						<option value="0">Khóa</option>
+						<option value="1">Hoạt động</option>
 					</select>
 				</div>
 				<div class="col-md-4 col-lg-4">

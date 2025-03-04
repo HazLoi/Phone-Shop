@@ -333,3 +333,51 @@ table.table tr th {
 	border-bottom-right-radius: 3px;
 	border-top-right-radius: 3px;
 }
+
+#alert-container {
+	position: fixed;
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 99999999;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	pointer-events: none; /* Giúp thông báo không ảnh hưởng đến phần tử bên dưới */
+}
+
+.alert_auto_remove {
+	min-width: 250px;
+	max-width: 350px;
+	text-align: center;
+	pointer-events: auto;
+	animation: fadeIn 0.3s ease-in-out, fadeOut 0.3s ease-in-out 7s;
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	display:none; 
+	opacity:1 !important; 
+}
+
+@keyframes fadeIn {
+	from {
+		 opacity: 0;
+		 transform: translateY(-20px);
+	}
+	to {
+		 opacity: 1;
+		 transform: translateY(0);
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		 opacity: 1;
+		 transform: translateY(0);
+	}
+	to {
+		 opacity: 0;
+		 transform: translateY(-20px);
+	}
+}

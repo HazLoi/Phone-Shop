@@ -12,19 +12,19 @@ $.ajaxSetup({ 'global': true });
 $.ajaxGlobalRunning = false; //Giá trị global để xác định ajax đang chạy, để cấu hình ngăn ko cho các ajax khác chạy
 
 //Khi ajax bắt đầu chạy thì show thành loading lên
-$(document).ajaxStart(function() {
+$(document).ajaxStart(function () {
     $.ajaxGlobalRunning = true;
     $("#loading_bar").show();
 });
 
 //Ajax complete thì ẩn loading
-$(document).ajaxComplete(function() {
+$(document).ajaxComplete(function () {
     $("#loading_bar").hide();
     $.ajaxGlobalRunning = false;
 });
 
 //Ajax dừng lại thì cho chạy tiếp lệnh tiếp theo
-$(document).ajaxStop(function() {
+$(document).ajaxStop(function () {
     $.ajaxGlobalRunning = false;
 });
 /**
@@ -33,7 +33,7 @@ $(document).ajaxStop(function() {
  ****************************
  */
 
-$(function() {
+$(function () {
 
     // calenderAndTimer();
 
@@ -41,7 +41,7 @@ $(function() {
 
     // $('#appointed_date').datepicker();
 
-    $(document).on('scroll', function() {
+    $(document).on('scroll', function () {
         if ($(window).scrollTop() > 100) {
             $('.back-top').css('display', "block");
         } else {
@@ -49,11 +49,11 @@ $(function() {
         }
     });
 
-    $(document).on("focus", "input", function() {
+    $(document).on("focus", "input", function () {
         $(this).select();
     });
 
-    $(document).on("blur", "input.number-format", function() {
+    $(document).on("blur", "input.number-format", function () {
         var value = $(this).val();
         var number = SplitNumber2(value);
         if (isNumber(number)) {
@@ -61,7 +61,7 @@ $(function() {
         }
     });
 
-    $(document).on("blur", "input.number-format-any", function() {
+    $(document).on("blur", "input.number-format-any", function () {
         var value = $(this).val();
         var decimal = $(this).attr('decimal');
         decimal = decimal == '' ? '2' : decimal;
@@ -71,34 +71,34 @@ $(function() {
         }
     });
 
-    $("input, textarea").focus(function() {
+    $("input, textarea").focus(function () {
         let val = $(this).attr("placeholder");
         $(this).attr("hide-placeholder", val);
         $(this).attr("placeholder", "");
     })
-    $("input, textarea").blur(function() {
+    $("input, textarea").blur(function () {
         let val = $(this).attr("hide-placeholder");
         $(this).attr("placeholder", val);
         $(this).attr("hide-placeholder", "");
     })
 
-    $(".change_password_user").click(function() {
+    $(".change_password_user").click(function () {
         change_password();
     })
 
-    $(".icon-cate.icon-other-date, .glyphicon.glyphicon-calendar").click(function() {
+    $(".icon-cate.icon-other-date, .glyphicon.glyphicon-calendar").click(function () {
         $(this).parent().prev().focus();
     })
 
-    $(".menu-item-active").each(function(){
-        if($(this).hasClass("active")){
+    $(".menu-item-active").each(function () {
+        if ($(this).hasClass("active")) {
             let level = $(this).attr("level");
             let root = $(this).attr("root-id");
-            if( root && root != "0" ){
-                $("#item-menu-"+root).addClass("active");
-                root =  $("#item-menu-"+root).attr("root-id");
-                if( root && root != "0" ){
-                    $("#item-menu-"+root).addClass("active");
+            if (root && root != "0") {
+                $("#item-menu-" + root).addClass("active");
+                root = $("#item-menu-" + root).attr("root-id");
+                if (root && root != "0") {
+                    $("#item-menu-" + root).addClass("active");
                 }
             }
         }
@@ -106,10 +106,10 @@ $(function() {
 });
 
 //for model when hidden and scrollable
-$('body').on('hide.bs.modal', function() {
-    setTimeout(function() {
+$('body').on('hide.bs.modal', function () {
+    setTimeout(function () {
         let exist_modal_in = false;
-        $(".modal").each(function() {
+        $(".modal").each(function () {
             if ($(this).hasClass("in")) {
                 exist_modal_in = true;
             }
@@ -120,42 +120,8 @@ $('body').on('hide.bs.modal', function() {
     }, 80);
 });
 
-// jQuery(function($) {
-//     $.datepicker.regional['vi'] = {
-//         closeText: lang.lb_close,
-//         prevText: '&#x3c;' + lang.lb_prev,
-//         nextText: lang.lb_next + '&#x3e;',
-//         currentText: lang.lb_today,
-//         monthNames: [lang.lb_month_1, lang.lb_month_2, lang.lb_month_3, lang.lb_month_4, lang.lb_month_5, lang.lb_month_6,
-//             lang.lb_month_7, lang.lb_month_8, lang.lb_month_9, lang.lb_month_10, lang.lb_month_11, lang.lb_month_12
-//         ],
-//         monthNamesShort: [lang.lb_short_1, lang.lb_short_2, lang.lb_short_3, lang.lb_short_4, lang.lb_short_5, lang.lb_short_6,
-//             lang.lb_short_7, lang.lb_short_8, lang.lb_short_9, lang.lb_short_10, lang.lb_short_11, lang.lb_short_12
-//         ],
-//         dayNames: [lang.lb_wday_1, lang.lb_wday_2, lang.lb_wday_3, lang.lb_wday_4, lang.lb_wday_5, lang.lb_wday_6, lang.lb_wday_7],
-//         dayNamesShort: [lang.lb_Shday_1, lang.lb_Shday_2, lang.lb_Shday_3, lang.lb_Shday_4, lang.lb_Shday_5, lang.lb_Shday_6, lang.lb_Shday_7],
-//         dayNamesMin: [lang.lb_Shday_1, lang.lb_Shday_2, lang.lb_Shday_3, lang.lb_Shday_4, lang.lb_Shday_5, lang.lb_Shday_6, lang.lb_Shday_7],
-//         weekHeader: 'Tu',
-//         dateFormat: 'dd/mm/yy',
-//         firstDay: 0,
-//         isRTL: false,
-//         showMonthAfterYear: false,
-//         yearSuffix: ''
-//     };
-//     $.datepicker.setDefaults($.datepicker.regional['vi']);
-// });
-
-/*
-- author: wildCard√
-- type_: POST or GET
-- data_: var data = new FormData(); data.append('a', value_a);
-- url_: url to api
-- global_: true or false
-*/
-
 //do ajax with node
 function _doAjaxNod(type_, data_, m_, act_, nod_, global_, doSomeThing) {
-
     if (data_ == '') {
         data_ = new FormData();
         data_.append('browser', _getBrowserName());
@@ -172,7 +138,7 @@ function _doAjaxNod(type_, data_, m_, act_, nod_, global_, doSomeThing) {
         async: true,
         cache: false,
         global: global_,
-        success: function(respone) {
+        success: function (respone) {
             var kq = respone.split("##");
             if (kq.length == 2) {
                 // debug_ajaxRunning(kq[0]);
@@ -212,7 +178,7 @@ function _doAjaxSync(type_, data_, m_, act_, global_, doSomeThing) {
         async: false,
         cache: false,
         global: global_,
-        success: function(respone) {
+        success: function (respone) {
             var kq = respone.split("##");
             if (kq.length == 2) {
                 debug_ajaxRunning(kq[0]);
@@ -368,7 +334,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     var n = number,
         prec = decimals;
 
-    var toFixedFix = function(n, prec) {
+    var toFixedFix = function (n, prec) {
         var k = Math.pow(10, prec);
         return (Math.round(n * k) / k).toString();
     };
@@ -469,11 +435,11 @@ function eraseCookie(name) {
 
 function check_all(id_check, class_check) {
     if ($(id_check).is(":checked")) {
-        $(class_check).each(function() {
+        $(class_check).each(function () {
             $(this).prop('checked', true);
         });
     } else {
-        $(class_check).each(function() {
+        $(class_check).each(function () {
             $(this).prop('checked', false);
         });
     }
@@ -486,7 +452,7 @@ function alert_dialog(message) {
         buttons: [{
             label: 'OK',
             cssClass: 'btn btn-primary btn-width',
-            action: function(dialogItself) {
+            action: function (dialogItself) {
                 dialogItself.close();
             }
         }]
@@ -495,31 +461,30 @@ function alert_dialog(message) {
 }
 
 function alert_void(_message, _success) {
-
-    let _id = parseInt((new Date()) / 1);
+    let _id = `alert_${Date.now()}`;
     let z_index = (_id % 100000000);
-    var html = '';
-    if (_success == 1)
-        html = `<div style="z-index:${z_index}; display:none; opacity: 1!important;" id="alert_${_id}" class="alert alert-success fade in alert-dismissible alert_auto_remove">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>
-                        <img product-id="9" src="${domain}/public/images/done.png" alt="" width="24" class="img_edit">
-                        ${_message}
-                    </div>`;
-    else
-        html = `<div style="z-index:${z_index}; display:none; opacity: 1!important;" id="alert_${_id}" class="alert alert-danger fade in alert-dismissible alert_auto_remove">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>
-                        <img product-id="9" src="${domain}/public/images/error.png" alt="" width="24" class="img_edit">
-                        ${_message}
-                    </div>`;
+    let html = '';
 
-    $("body").prepend(html);
+    // Kiểm tra nếu container chưa tồn tại thì thêm vào body
+    if (!document.getElementById("alert-container")) {
+        $("body").append('<div id="alert-container"></div>');
+    }
+
+    html = `<div class="alert ${_success == 1 ? 'alert-success' : 'alert-danger'} fade in alert-dismissible alert_auto_remove" style="z-index:${z_index};" role="alert" id="alert_${_id}">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <img src="${domain}/public/images/${_success == 1 ? 'done' : 'error'}.png" alt="" width="24" class="img_edit">
+                ${_message}
+            </div>`;
+
+    // Thêm vào container
+    $("#alert-container").append(html);
     $("#alert_" + _id).show();
-    setTimeout(function() {
+    setTimeout(function () {
         $("#alert_" + _id).hide();
-    }, 7200)
-    setTimeout(function() {
+    }, 5000);
+    setTimeout(function () {
         $("#alert_" + _id).remove();
-    }, 8000)
+    }, 6000);
     return false;
 }
 
@@ -586,7 +551,7 @@ function _getBrowserName() {
     return browserName;
 }
 
-$.urlParam = function(name) {
+$.urlParam = function (name) {
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results == null) {
         return null;
@@ -594,7 +559,7 @@ $.urlParam = function(name) {
         return results[1] || 0;
     }
 }
-$.setURLParam = ( param, paramVal)=>{
+$.setURLParam = (param, paramVal) => {
 
     var url = window.location.href;
     var TheAnchor = null;
@@ -667,7 +632,7 @@ function print_bill_to_epson(printer, _shop_id, _order_id, _created_at) {
     data.append('shop_id', _shop_id);
     data.append('order_id', _order_id);
     data.append('created_at', _created_at);
-    _doAjaxPrint('POST', data, 'print', 'all_to_epson', true, function(response) {
+    _doAjaxPrint('POST', data, 'print', 'all_to_epson', true, function (response) {
         genetalTemplateBillToEpson(printer, response.data.dOrder.shop_name,
             response.data.dOrder.shop_address, response.data.dOrder.shop_mobile,
             response.data.dOrder, response.data.lDetail,
@@ -681,7 +646,7 @@ function print_online_bill_to_epson(printer, _cart_id, _created_at) {
     var data = new FormData();
     data.append('cart_id', _cart_id);
     data.append('created_at', _created_at);
-    _doAjaxPrint('POST', data, 'print', 'orderonline_to_epson', true, function(response) {
+    _doAjaxPrint('POST', data, 'print', 'orderonline_to_epson', true, function (response) {
 
         var show_vat = response.data.show_vat;
         var dCart = response.data.dCart;
@@ -929,7 +894,7 @@ function _downloadTheLink(_link) {
             buttons: [{
                 label: 'OK',
                 cssClass: 'btn btn-default btn-width',
-                action: function(dialogItself) {
+                action: function (dialogItself) {
                     dialogItself.close();
                 }
             }]
@@ -969,7 +934,7 @@ function date_format(_type, times) {
     else if (_type == 'd/m H:i')
         return zeroFill(strdate.getDate(), 2) + '/' + zeroFill((strdate.getMonth() + 1), 2) + '&nbsp;' + zeroFill(strdate.getHours(), 2) + ':' + zeroFill(strdate.getMinutes(), 2);
     else if (_type == 'H:i')
-        return zeroFill(strdate.getHours(), 2) + ':' + zeroFill(strdate.getMinutes(), 2);    
+        return zeroFill(strdate.getHours(), 2) + ':' + zeroFill(strdate.getMinutes(), 2);
     return '-';
 }
 
@@ -999,7 +964,7 @@ function getSortField(_sortBy) {
     item.field = '';
     item.sort = '';
 
-    $("." + _sortBy).each(function() {
+    $("." + _sortBy).each(function () {
         if ($(this).hasClass('active')) {
             item.field = $(this).attr('field');
             if ($(this).hasClass('fa-caret-up'))
@@ -1013,13 +978,13 @@ function getSortField(_sortBy) {
 }
 
 function run_something(m, act, nod) {
-    _doAjaxNod('POST', '', m, act, nod, true, function(response) {})
+    _doAjaxNod('POST', '', m, act, nod, true, function (response) { })
 }
 
 function dropdownCheckListHandleAllSelected(
-    _id_selected /*ID của selected box này*/ ,
-    _val_just_selected /*Giá trị của selected box này*/ ,
-    _val_all_option = '' /*Giá trị của lựa chọn tất cả*/ ) {
+    _id_selected /*ID của selected box này*/,
+    _val_just_selected /*Giá trị của selected box này*/,
+    _val_all_option = '' /*Giá trị của lựa chọn tất cả*/) {
 
     let val = $(`#${_id_selected}`).val();
 
@@ -1060,7 +1025,7 @@ function dropdownCheckListHandleAllSelected(
     $(`#${_id_selected}`).dropdownchecklist('refresh');
 }
 
-$(document).on("click", ".hd-file img", function() {
+$(document).on("click", ".hd-file img", function () {
     let link = $(this).parent().attr("link");
     let type = $(this).parent().attr("image-type");
     if (link && link.length > 20) {
@@ -1071,7 +1036,7 @@ $(document).on("click", ".hd-file img", function() {
         }
     }
 })
-$(document).on("click", ".hd-file .delete", function() {
+$(document).on("click", ".hd-file .delete", function () {
     $(this).parent().remove();
 })
 
@@ -1120,16 +1085,16 @@ function getFirstUrlIsImageInStrList(url) {
     let l = url.split(';');
     let r = '';
     l.forEach(el => {
-        if( r == '' && el != '' && isUrl(el) && isUrlImage(el) ){
+        if (r == '' && el != '' && isUrl(el) && isUrlImage(el)) {
             r = el;
         }
     });
-    
+
     return r;
 }
 
 //Chuyển dữ liệu dạng object thành FormData để submit POST cho api
-function objectToFormData(o){
+function objectToFormData(o) {
     let d = new FormData();
     Object.keys(o).forEach(k => d.append(k, o[k]));
     return d;
@@ -1147,7 +1112,7 @@ function isJSON(str) {
 // duy592022
 function mobileIsValid(mobile) {
     return /((09|03|07|08|05)+([0-9]{8})\b)/g.test(mobile)
-  }
+}
 
 /**
  * Hàm setClass dùng để thêm hoặc xóa class của jquery element
@@ -1155,13 +1120,10 @@ function mobileIsValid(mobile) {
  * @param {String} className Tên class
  * @param {Boolean} status true: add class, false: remove class
  */
-function setClass(elements, className , status)
-{
-    if (status)
-    {
+function setClass(elements, className, status) {
+    if (status) {
         elements.addClass(className);
-    }else 
-    {
+    } else {
         elements.removeClass(className);
     }
 }
@@ -1172,10 +1134,9 @@ function setClass(elements, className , status)
  * @param {String} separator // Kí tự phân cách của fullname. Mặc định là khoảng cách " ".
  * @returns String
  */
-function firstNameChar(fullname,separator = " ")
-{
+function firstNameChar(fullname, separator = " ") {
     let substring = fullname.split(separator);
-    return substring.map((str)=>{
+    return substring.map((str) => {
         return str[0];
     }).join("");
 }
@@ -1184,7 +1145,7 @@ function firstNameChar(fullname,separator = " ")
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
-    for (var i = 0; i < 6; i++ ) {
+    for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;

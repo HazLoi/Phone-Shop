@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.layout-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#authorize-button {
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#authorize-button:hover {
+    background-color: #357ae8;
+}
+
+#filter-section {
+    margin-top: 20px;
+}
+
+#search-box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#file-list {
+    margin-top: 20px;
+}
+
+#file-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#file-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.file-name {
+    margin-left: 10px;
+}

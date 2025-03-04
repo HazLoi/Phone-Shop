@@ -28,7 +28,7 @@ class user extends model
 
 		$arr['password']					= '';
 		$arr['salt']						= '';
-		if($this->get('password') != ''){
+		if ($this->get('password') != '') {
 			$salt = $this->randString();
 			$password = md5(md5($this->get('password')) . $salt);
 			$arr['password']					= $password;
@@ -61,7 +61,7 @@ class user extends model
 		$arr['email']						= $this->get('email');
 		$arr['address']					= $this->get('address');
 		$arr['status']						= $this->get('status');
-		if($this->get('password') != ''){
+		if ($this->get('password') != '') {
 			$salt = $this->randString();
 			$password = md5(md5($this->get('password')) . $salt);
 			$arr['password']					= $password;
@@ -73,7 +73,8 @@ class user extends model
 		return true;
 	}
 
-	private function randString($length = 10) {
+	private function randString($length = 10)
+	{
 		$characters = 'w01s2345arbctvdeffg1hijklm4nop6789qrstuv3wxyz5AB675839CDEFGHIJ627g184g9gKLMfNdOPsQRSTfUVWgXdYsZ';
 		$randomString = '';
 		for ($i = 0; $i < $length; $i++) {
@@ -99,7 +100,7 @@ class user extends model
 					LEFT JOIN $db->tbl_fix`position` ON position.`id` = user.`position`
 					WHERE `username` = '$username' 
 					AND `password` = '{$this->get('password')}' 
-					AND `status`='1' 
+					AND `status` = '1' 
 					limit 0,1
 				";
 		$rows = $db->executeQuery($sql, 1);
@@ -155,19 +156,114 @@ class user extends model
 
 		$result = $db->executeQuery($sql, 1);
 
-		return $result['total'] + 0;
+		return isset($result['total']) ? $result['total'] : 0;
 	}
 
-	public function check_mobile(){
+	public function check_mobile()
+	{
 		global $db;
 
+		$id = $this->get('id');
+		$mobile = $this->get('mobile');
+
+		$sql_id = '';
+		if ($id != '') {
+			$sql_id = " AND `id` != '$id' ";
+		}
+
 		$sql = "SELECT *
-				FROM $db->tbl_fix$this->class_name
-				WHERE `mobile` = 'mobile'
+				FROM $db->tbl_fix`$this->class_name`
+				WHERE `mobile` = '$mobile'
+				$sql_id
 				";
 
 		$result = $db->executeQuery($sql, 1);
 
 		return $result;
+	}
+
+	public function list_all($keyword = '', $field = '', $sort = 'DESC', $offset = '', $limit = '')
+	{
+		global $db;
+
+		$shop_id = $this->get('shop_id');
+		$gid = $this->get('gid');
+
+		$sql_shop_id = '';
+		if ($shop_id != '') {
+			$sql_shop_id = " AND `shop_id` = '$shop_id' ";
+		}
+
+		$sql_gid = '';
+		if ($gid != '') {
+			$sql_gid = " AND `gid` = '$gid' ";
+		}
+
+		$sql_keyword = '';
+		if ($keyword != '') {
+			$sql_keyword = " AND ( `username` LIKE '%$keyword%' OR `mobile` LIKE '%$keyword%' OR `fullname` LIKE '%$keyword%') ";
+		}
+
+		$sql_order_by = " ORDER BY `id` DESC ";
+		if ($field != '') {
+			$sql_order_by = " ORDER BY $field $sort ";
+		}
+
+		$sql_limit = '';
+		if ($limit != '') {
+			$sql_limit = " LIMIT $offset, $limit ";
+		}
+
+		$sql = "SELECT `user`.*
+				FROM $db->tbl_fix`user`
+				WHERE 1
+				$sql_shop_id
+				$sql_gid
+				$sql_keyword
+				$sql_order_by
+				$sql_limit
+				";
+
+		$result = $db->executeQuery_list($sql);
+
+		return $result;
+	}
+
+	// đếm tất cả
+	public function count_all($keyword = '')
+	{
+		global $db;
+
+		$shop_id = $this->get('shop_id');
+		$gid = $this->get('gid');
+
+		$sql_shop_id = '';
+		if ($shop_id != '') {
+			$sql_shop_id = " AND `shop_id` = '$shop_id' ";
+		}
+
+		$sql_gid = '';
+		if ($gid != '') {
+			$sql_gid = " AND `gid` = '$gid' ";
+		}
+
+		$sql_keyword = '';
+		if ($keyword != '') {
+			$sql_keyword = " AND ( `username` LIKE '%$keyword%' OR `mobile` LIKE '%$keyword%' OR `fullname` LIKE '%$keyword%') ";
+		}
+
+		$sql = "SELECT COUNT(*) total_record
+				FROM $db->tbl_fix`user`
+				WHERE 1
+				$sql_shop_id
+				$sql_gid
+				$sql_keyword
+				";
+
+		$result = $db->executeQuery($sql, 1);
+
+		$data = array();
+		$data['total_record'] = isset($result['total_record']) && $result['total_record'] > 0 ? $result['total_record'] : 0;
+		return $data;
 	}
 }

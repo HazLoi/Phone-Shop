@@ -5,6 +5,8 @@ if($act == 'menu'){
 	
 }elseif($act == 'user'){
 	
-}else{
+}elseif ($act == 'setting') {
+
+} else{
 	$main->redirect($page_404);
 }

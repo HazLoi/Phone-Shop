@@ -7,8 +7,6 @@ class gid extends model {
 	protected $default_report;//default_report_permission
 	protected $permission_resellers;//permission_resellers
 	protected $shop_accessed;//shop_accessed: cửa hàng được phép truy cập
-	protected $bank_change_allow;//Danh sách ngân hàng cho phép xem số dư thay đổi
-	protected $treasurer_allow_all;//On/off = 0|| 1 => chỉ người tạo mới xem được đơn mình tạo
 	
 	public function add(){
 		global $db;

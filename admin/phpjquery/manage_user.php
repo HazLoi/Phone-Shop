@@ -24,7 +24,13 @@ if ($act == 'idx') {
 		$kq['lPosition'] = $position->filter('','','');
 
 		echo 'done##', $main->toJsonData(200, 'success', $kq);
-		unset($kq);
+	} elseif ($nod == 'detail') {
+		$user = new user();
+		$id  = $main->post('id');
+
+		$user->set('id', $id);
+		$kq = $user->get_detail();
+		echo 'done##', $main->toJsonData(200, 'success', $kq);
 	} else {
 		echo 'Missing action';
 		$db->close();
@@ -34,7 +40,6 @@ if ($act == 'idx') {
 	if ($nod == 'save') { //lưu menu khi tạo/ sửa
 		$user = new user();
 		
-		$id 	= $main->post('id');
 		$fullname 	= $main->post('fullname');
 		$mobile 		= $main->post('mobile');
 		$address 	= $main->post('address');
@@ -55,22 +60,43 @@ if ($act == 'idx') {
 		if(isset($check_mobile['id'])){
 			echo 'done##', $main->toJsonData(403, 'Số điện thoại đã tồn tại', '');
 		}else{
-			if (isset($id) && $id != '') {
-				$user->set('id', $id);
-				$user->update();
-			} else {
-				$user->add();
-			}
+			$user->add();
 			echo 'done##', $main->toJsonData(200, 'success', '');
 		}
-
-	} elseif ($nod == 'detail') {
+	} else {
+		echo 'Missing action';
+		$db->close();
+		exit();
+	}
+} elseif ($act == 'edit') {
+	if ($nod == 'save') { //lưu menu khi tạo/ sửa
 		$user = new user();
-		$id  = $main->post('id');
+		
+		$id = $main->post('id');
+		$fullname = $main->post('fullname');
+		$mobile = $main->post('mobile');
+		$address = $main->post('address');
+		$position = $main->post('position');
+		$status = $main->post('status');
+		$email = $main->post('email');
+		$password = $main->post('password');
 
 		$user->set('id', $id);
-		$kq = $user->get_detail();
-		echo 'done##', $main->toJsonData(200, 'success', $kq);
+		$user->set('fullname', $fullname);
+		$user->set('address', $address);
+		$user->set('position', $position);
+		$user->set('status', $status);
+		$user->set('email', $email);
+		$user->set('mobile', $mobile);
+		$user->set('password', $password);
+		$check_mobile = $user->check_mobile();
+
+		if(isset($check_mobile['id'])){
+			echo 'done##', $main->toJsonData(403, 'Số điện thoại đã tồn tại', '');
+		}else{
+			$user->update();
+			echo 'done##', $main->toJsonData(200, 'success', '');
+		}
 	} else {
 		echo 'Missing action';
 		$db->close();
